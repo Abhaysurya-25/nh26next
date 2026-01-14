@@ -113,7 +113,7 @@ const Prizes = () => {
         <h2 className="text-5xl font-bold text-center mb-24 font-['PPMori'] tracking-tight">Prizes</h2>
 
         {/* Podium Container */}
-        <div className="flex items-end justify-center gap-4 md:gap-8 h-[550px] w-full max-w-3xl pb-10">
+        <div className="flex items-end justify-center gap-2 md:gap-8 h-[550px] w-full max-w-3xl pb-10">
           
           {/* 2nd Place (Left) - Silver */}
           <div
@@ -121,7 +121,7 @@ const Prizes = () => {
             className="w-1/3 max-w-[200px] bg-white rounded-t-lg relative flex flex-col justify-end pb-6 items-center"
           >
             {/* Prize Slot */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] py-1 rounded-md bg-gray-300 text-gray-800 font-bold font-['PPMori'] text-xl flex justify-center items-center z-0">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] md:w-[80%] py-1 rounded-md bg-gray-300 text-gray-800 font-bold font-['PPMori'] text-sm md:text-xl flex justify-center items-center z-0 whitespace-nowrap">
                 ₹ 15,000
             </div>
 
@@ -140,7 +140,7 @@ const Prizes = () => {
             className="w-1/3 max-w-[200px] bg-white rounded-t-lg relative flex flex-col justify-end pb-6 items-center shadow-[0_0_30px_rgba(255,255,255,0.3)] z-10"
           >
              {/* Prize Slot */}
-             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] py-1 rounded-md bg-yellow-400 text-yellow-900 font-bold font-['PPMori'] text-xl flex justify-center items-center z-0">
+             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] md:w-[80%] py-1 rounded-md bg-yellow-400 text-yellow-900 font-bold font-['PPMori'] text-sm md:text-xl flex justify-center items-center z-0 whitespace-nowrap">
                 ₹ 25,000
              </div>
 
@@ -158,7 +158,7 @@ const Prizes = () => {
              className="w-1/3 max-w-[200px] bg-white rounded-t-lg relative flex flex-col justify-end pb-6 items-center"
           >
              {/* Prize Slot */}
-             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] py-1 rounded-md bg-orange-300 text-orange-900 font-bold font-['PPMori'] text-xl flex justify-center items-center z-0">
+             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] md:w-[80%] py-1 rounded-md bg-orange-300 text-orange-900 font-bold font-['PPMori'] text-sm md:text-xl flex justify-center items-center z-0 whitespace-nowrap">
                 ₹ 10,000
              </div>
 

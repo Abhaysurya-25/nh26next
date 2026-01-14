@@ -16,12 +16,68 @@ const TEAMS_DATA = [
 
 const FlipMemberCard = ({ onHoverStart, onHoverEnd }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const cardRef = useRef(null);
+  
+  // Keep ref in sync with state for event listener to avoid stale closure without re-binding effect
+  const isFlippedRef = useRef(isFlipped);
+  useEffect(() => {
+    isFlippedRef.current = isFlipped;
+  }, [isFlipped]);
+
+  // Handle "click outside" to close card on mobile
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (typeof window !== 'undefined' && window.innerWidth < 768) { // Only relevant for mobile logic
+        if (cardRef.current && !cardRef.current.contains(event.target)) {
+          // Only close if it's currently open
+          if (isFlippedRef.current) {
+            setIsFlipped(false);
+            onHoverEnd?.(); // Resume auto-scroll if we close it
+          }
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside); // Better mobile support
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [onHoverEnd]);
+
+  // Desktop: Hover to flip
+  const handleMouseEnter = () => {
+    if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+      setIsFlipped(true);
+      onHoverStart?.();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+      setIsFlipped(false);
+      onHoverEnd?.();
+    }
+  };
+
+  // Mobile: Click to flip
+  const handleClick = () => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      const nextState = !isFlipped;
+      setIsFlipped(nextState);
+      if (nextState) onHoverStart?.(); 
+      else onHoverEnd?.(); 
+    }
+  };
 
   return (
     <div 
-      className="relative w-[260px] h-[260px] md:w-[300px] md:h-[320px] perspective-1000 shrink-0"
-      onMouseEnter={() => { setIsFlipped(true); onHoverStart?.(); }}
-      onMouseLeave={() => { setIsFlipped(false); onHoverEnd?.(); }}
+      ref={cardRef}
+      className="relative w-[260px] h-[260px] md:w-[300px] md:h-[320px] perspective-1000 shrink-0 cursor-pointer md:cursor-default"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
     >
       <motion.div
         className="relative w-full h-full preserve-3d"
