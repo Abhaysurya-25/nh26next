@@ -5,7 +5,6 @@ import Link from 'next/link';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
 
   const navItems = [
     { name: 'Home', href: '/' },
@@ -22,15 +21,6 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <nav
       className={`
@@ -44,20 +34,11 @@ const Navbar = () => {
         className={`
           rounded-full px-6 py-3
           flex items-center justify-between md:justify-normal gap-4 lg:gap-8
-          border transition-all duration-500 ease-in-out
+          border-2 transition-all duration-500 ease-in-out
           ml-4 w-[calc(100vw-2rem)] translate-x-0
           md:ml-[50%] md:w-auto md:-translate-x-1/2 md:pr-15
-          ${
-            isScrolled
-              ? 'bg-[#02093D/10] backdrop-blur-[15px] border-[#ff0000] shadow-[0_8px_32px_rgba(0,0,0,0.3)]'
-              : 'bg-[#02093D] backdrop-blur-md border-[#ff0000] shadow-none'
-          }
+          bg-[#02093D] border-[#ff0000] shadow-[0_8px_32px_rgba(0,0,0,0.3)]
         `}
-        style={
-          isScrolled
-            ? { background: 'bg-[#02093D/40]' }
-            : undefined
-        }
       >
         {/* Logo */}
         <div className="flex-shrink-0">
@@ -105,11 +86,7 @@ const Navbar = () => {
       {/* Mobile Dropdown Menu */}
       {isOpen && (
         <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 rounded-2xl p-4 flex flex-col gap-2 z-40 md:hidden w-[70vw] max-w-sm animate-fade-in-up transition-all duration-500
-          ${
-            isScrolled
-              ? 'bg-[#02093D]/80 backdrop-blur-[15px] border border-[#ff0000] shadow-[0_8px_32px_rgba(0,0,0,0.3)]'
-              : 'bg-[#02093D] backdrop-blur-md border border-[#ff0000] shadow-xl'
-          }
+          bg-[#02093D] border border-[#ff0000] shadow-[0_8px_32px_rgba(0,0,0,0.3)]
         `}>
           {navItems.map((item) => (
             <Link

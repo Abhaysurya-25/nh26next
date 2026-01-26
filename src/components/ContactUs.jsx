@@ -8,7 +8,7 @@ const ContactUs = () => {
     <section className="min-h-screen bg-[#010524ff] text-white py-12 px-4 flex flex-col items-center justify-between relative overflow-hidden">
       
       {/* 1. Header Section */}
-      <h2 className="text-3xl md:text-5xl font-bold mb-8 md:mb-12 text-center text-[#ff0000]">
+      <h2 className="text-3xl md:text-5xl font-bold mb-8 md:mb-12 text-center text-white">
         Contact Us
       </h2>
 

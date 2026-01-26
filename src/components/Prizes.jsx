@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 const Prizes = () => {
   const container = useRef(null)
+  const [canHover, setCanHover] = useState(false)
   
   // Refs for elements
   const bar2 = useRef(null)
@@ -94,6 +95,7 @@ const Prizes = () => {
 
     // Trigger floating and glowing after sequence
     tl.call(() => {
+        setCanHover(true)
         floatAnim(coin2.current, 15, 2.0)
         floatAnim(coin1.current, 15, 2.2) 
         floatAnim(coin3.current, 15, 1.8)
@@ -107,10 +109,26 @@ const Prizes = () => {
 
   }, { scope: container })
 
+  const handleHover = (e) => {
+    if (!canHover) return
+    const el = e.currentTarget
+    if (el.getAttribute('data-spinning') === 'true') return
+    
+    el.setAttribute('data-spinning', 'true')
+    gsap.to(el, {
+      rotationY: '+=360',
+      duration: 1.5,
+      ease: "power2.out",
+      onComplete: () => {
+        el.removeAttribute('data-spinning')
+      }
+    })
+  }
+
   return (
     <section ref={container} className="w-full py-20 bg-[#010524ff] text-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-center">
-        <h2 className="text-5xl font-bold text-center text-[#ff0000] mb-24 font-['PPMori'] tracking-tight">Prizes</h2>
+        <h2 className="text-5xl font-bold text-center text-[#fffff] mb-24 font-['PPMori'] tracking-tight">Prizes</h2>
 
         {/* Podium Container */}
         <div className="flex items-end justify-center gap-2 md:gap-8 h-[550px] w-full max-w-3xl pb-10">
@@ -118,7 +136,7 @@ const Prizes = () => {
           {/* 2nd Place (Left) - Silver */}
           <div
             ref={bar2}
-            className="w-1/3 max-w-[200px] bg-[#ff0000] rounded-t-lg relative flex flex-col justify-end pb-6 items-center"
+            className="w-1/3 max-w-[200px] bg-white rounded-t-lg relative flex flex-col justify-end pb-6 items-center"
           >
             {/* Prize Slot */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] md:w-[80%] py-1 rounded-md bg-gray-300 text-gray-800 font-bold font-['PPMori'] text-sm md:text-xl flex justify-center items-center z-0 whitespace-nowrap">
@@ -126,7 +144,7 @@ const Prizes = () => {
             </div>
 
             {/* Moving Container for Coin */}
-            <div ref={coin2} className="relative z-20 w-24 h-24 flex items-center justify-center rounded-full">
+            <div ref={coin2} onMouseEnter={handleHover} className="relative z-20 w-24 h-24 flex items-center justify-center rounded-full">
                  {/* Coin Image */}
                  <div className="relative z-10 w-full h-full">
                     <Image src="/assets/second.png" alt="2nd Place" width={96} height={96} className="object-contain" />
@@ -137,14 +155,14 @@ const Prizes = () => {
           {/* 1st Place (Center) - Gold */}
           <div
             ref={bar1}
-            className="w-1/3 max-w-[200px] bg-[#ff0000] rounded-t-lg relative flex flex-col justify-end pb-6 items-center shadow-[0_0_30px_rgba(255,255,255,0.3)] z-10"
+            className="w-1/3 max-w-[200px] bg-white rounded-t-lg relative flex flex-col justify-end pb-6 items-center shadow-[0_0_30px_rgba(255,255,255,0.3)] z-10"
           >
              {/* Prize Slot */}
              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] md:w-[80%] py-1 rounded-md bg-yellow-400 text-yellow-900 font-bold font-['PPMori'] text-sm md:text-xl flex justify-center items-center z-0 whitespace-nowrap">
                 ₹ 25,000
              </div>
 
-             <div ref={coin1} className="relative z-20 w-24 h-24 flex items-center justify-center rounded-full">
+             <div ref={coin1} onMouseEnter={handleHover} className="relative z-20 w-24 h-24 flex items-center justify-center rounded-full">
                  {/* Coin Image */}
                  <div className="relative z-10 w-full h-full">
                     <Image src="/assets/first.png" alt="1st Place" width={96} height={96} className="object-contain" />
@@ -155,14 +173,14 @@ const Prizes = () => {
           {/* 3rd Place (Right) - Bronze */}
           <div
              ref={bar3}
-             className="w-1/3 max-w-[200px] bg-[#ff0000] rounded-t-lg relative flex flex-col justify-end pb-6 items-center"
+             className="w-1/3 max-w-[200px] bg-white rounded-t-lg relative flex flex-col justify-end pb-6 items-center"
           >
              {/* Prize Slot */}
              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] md:w-[80%] py-1 rounded-md bg-orange-300 text-orange-900 font-bold font-['PPMori'] text-sm md:text-xl flex justify-center items-center z-0 whitespace-nowrap">
                 ₹ 10,000
              </div>
 
-             <div ref={coin3} className="relative z-20 w-24 h-24 flex items-center justify-center rounded-full">
+             <div ref={coin3} onMouseEnter={handleHover} className="relative z-20 w-24 h-24 flex items-center justify-center rounded-full">
                  {/* Coin Image */}
                  <div className="relative z-10 w-full h-full">
                     <Image src="/assets/third.png" alt="3rd Place" width={96} height={96} className="object-contain" />

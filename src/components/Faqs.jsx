@@ -73,7 +73,7 @@ const Faqs = () => {
 
     return (
         <div className="w-full py-20 px-4 md:px-10 bg-[#010524ff]">
-            <h2 className="text-4xl md:text-5xl font-bold text-center text-[#FF0000] mb-12 font-['PPMori']">
+            <h2 className="text-4xl md:text-5xl font-bold text-center text-white mb-12 font-['PPMori']">
                 Frequently Asked Questions
             </h2>
             <div className="flex flex-col w-full">

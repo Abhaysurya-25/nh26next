@@ -661,7 +661,7 @@ const Sponsors = ({
 
       <BentoCardGrid gridRef={gridRef}>
         {/* Title inside Grid for perfect alignment */}
-        <h2 className="text-3xl md:text-5xl font-bold text-center text-[#ff0000] mb-8 z-30 relative font-['PPMori'] tracking-tight pt-4 w-full">
+        <h2 className="text-3xl md:text-5xl font-bold text-center text-white mb-8 z-30 relative font-['PPMori'] tracking-tight pt-4 w-full">
             Sponsors
         </h2>
 
@@ -680,7 +680,7 @@ const Sponsors = ({
                   {sponsorsData[tier].map((item, index) => {
                       const tierColor = tierColors[tier] || glowColor;
                       
-                      const baseClassName = `card flex flex-col items-center justify-center relative rounded-[20px] border border-solid font-light overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] ${
+                      const baseClassName = `card flex flex-col items-center justify-center relative rounded-[20px] border-2 border-solid font-light overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] ${
                           enableBorderGlow ? 'card--border-glow' : ''
                       } ${item.link ? 'cursor-pointer' : ''}`;
 
